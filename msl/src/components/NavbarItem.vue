@@ -31,12 +31,10 @@
                 </svg>
             </button>
             <div class="sidebar-links">
-                <RouterLink to="/" @click="toggleSidebar" :class="{ 'active-link': $route.path === '/' }">About Me
-                </RouterLink>
-                <RouterLink to="/projects" @click="toggleSidebar"
-                    :class="{ 'active-link': $route.path === '/projects' }">Projects</RouterLink>
-                <RouterLink to="/contact" @click="toggleSidebar" :class="{ 'active-link': $route.path === '/contact' }">
-                    Contact</RouterLink>
+                <RouterLink to="/" @click="toggleSidebar" :class="{ 'active-link': $route.path === '/' }">Home</RouterLink>
+                <RouterLink to="/services" @click="toggleSidebar":class="{ 'active-link': $route.path === '/services' }">Services</RouterLink>
+                <RouterLink to="/about" @click="toggleSidebar":class="{ 'active-link': $route.path === '/about' }">About</RouterLink>
+                <RouterLink to="/contact" @click="toggleSidebar" :class="{ 'active-link': $route.path === '/contact' }">Contact</RouterLink>
             </div>
         </div>
     </div>
@@ -266,4 +264,60 @@ const sidebarClass = computed(() => (isSidebarOpen.value ? 'open' : 'closed'))
     font-weight: 600;
     /* Bold font weight */
 }
+
+@media (max-width: 1114px) {
+    .navbar-container {
+        height: 12vh;
+        padding: 0 3vw;
+    }
+
+    .logo img {
+        height: 120px;
+        padding-top: 0.5rem;
+    }
+
+    .nav-links {
+        gap: 20px;
+        font-size: 1.6rem;
+    }
+
+    .sidebar {
+        width: 90vw;
+    }
+
+    .sidebar-links {
+        font-size: 1.6rem;
+    }
+}
+
+/* For screens smaller than 480px */
+@media (max-width: 820px) {
+    .navbar-container {
+        height: 10vh;
+        padding: 0 2vw;
+    }
+
+    .logo img {
+        height: 100px;
+        padding-top: 0.3rem;
+    }
+
+    .nav-links {
+        gap: 10px;
+        font-size: 1.4rem;
+    }
+
+    .hamburger {
+        padding-right: 5px;
+    }
+
+    .sidebar {
+        width: 95vw;
+    }
+
+    .sidebar-links {
+        font-size: 1.4rem;
+    }
+}
+
 </style>
