@@ -1,15 +1,22 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div id="about" class="container">
+    <div class="text">About</div>
   </div>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+<style scoped>
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  font-size: 5rem;
+  position: relative;
+  background-color: rgb(255, 255, 255);
+}
+
+.text {
+  color: rgb(7, 0, 0);
 }
 </style>
