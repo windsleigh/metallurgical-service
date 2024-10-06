@@ -1,18 +1,28 @@
 <template>
     <div :class="['navbar-container', { scrolled: isScrolled }]">
-        <div class="nav-links desktop-nav">
-            <RouterLink to="/">Home</RouterLink>
-            <RouterLink to="/services">Services</RouterLink>
-            <RouterLink to="/about">About</RouterLink>
-            <RouterLink to="/contact">Contact</RouterLink>
-
+        <!-- Logo Section -->
+        <div class="logo">
+            <RouterLink to="/">
+                <img src="./logo.png" alt="Logo" class="logo-image" />
+            </RouterLink>
         </div>
+
+        <!-- Navigation Links -->
+        <div class="nav-links desktop-nav">
+            <RouterLink to="/" :class="{ 'active-link': $route.path === '/' }">Home</RouterLink>
+            <RouterLink to="/services" :class="{ 'active-link': $route.path === '/services' }">Services</RouterLink>
+            <RouterLink to="/about" :class="{ 'active-link': $route.path === '/about' }">About</RouterLink>
+            <RouterLink to="/contact" :class="{ 'active-link': $route.path === '/contact' }">Contact</RouterLink>
+        </div>
+
+        <!-- Mobile Navigation -->
         <button class="hamburger mobile-nav" @click="toggleSidebar" v-show="!isSidebarOpen">
             <div class="bar"></div>
             <div class="bar"></div>
             <div class="bar"></div>
         </button>
 
+        <!-- Sidebar for Mobile -->
         <div :class="['sidebar', sidebarClass]">
             <button class="close-button" @click="toggleSidebar">
                 <svg height="24px" width="24px" viewBox="0 0 24 24">
@@ -21,9 +31,12 @@
                 </svg>
             </button>
             <div class="sidebar-links">
-                <RouterLink to="/" @click="toggleSidebar">About Me</RouterLink>
-                <RouterLink to="/projects" @click="toggleSidebar">Projects</RouterLink>
-                <RouterLink to="/contact" @click="toggleSidebar">Contact</RouterLink>
+                <RouterLink to="/" @click="toggleSidebar" :class="{ 'active-link': $route.path === '/' }">About Me
+                </RouterLink>
+                <RouterLink to="/projects" @click="toggleSidebar"
+                    :class="{ 'active-link': $route.path === '/projects' }">Projects</RouterLink>
+                <RouterLink to="/contact" @click="toggleSidebar" :class="{ 'active-link': $route.path === '/contact' }">
+                    Contact</RouterLink>
             </div>
         </div>
     </div>
@@ -55,20 +68,33 @@ const sidebarClass = computed(() => (isSidebarOpen.value ? 'open' : 'closed'))
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 .navbar-container {
     display: flex;
-    justify-content: center;
-    /* Center the entire navbar */
+    justify-content: space-between;
     align-items: center;
     position: fixed;
     width: 100vw;
-    height: 8vh;
+    height: 20vh;
     top: 0;
     left: 0;
     padding: 0 5vw;
     background-color: rgb(255, 255, 255);
     transition: background-color 0.5s ease-in-out;
     z-index: 100;
+    user-select: none;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    padding-top: 1rem;
+    height: 180px;
+    width: auto;
 }
 
 .navbar-container.scrolled {
@@ -78,53 +104,60 @@ const sidebarClass = computed(() => (isSidebarOpen.value ? 'open' : 'closed'))
 
 .nav-links {
     display: flex;
-    justify-content: center;
-    /* Center the links within the navbar */
+    justify-content: flex-end;
     align-items: center;
     gap: 40px;
-    /* Equal spacing between buttons */
-    font-size: 1.3rem;
-    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    font-size: 2rem;
+    outline: none;
+    -webkit-user-select: none;
+    /* Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE10+/Edge */
+    user-select: none;
+    /* Standard */
+
 }
 
 .nav-links a {
     position: relative;
     text-decoration: none;
-    color: rgb(24, 141, 156);
+    color: rgb(0, 88, 160);
     text-transform: uppercase;
     letter-spacing: 4px;
+    outline: none;
+    -webkit-user-select: none;
+    /* Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE10+/Edge */
+    user-select: none;
+    /* Standard */
+
 }
 
-.nav-links a:visited {
-    color: rgb(24, 141, 156);
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 3px;
+/* Style for the active navigation link */
+.nav-links a.active-link::after,
+.sidebar-links a.active-link::after {
+    content: "";
+    display: block;
     width: 100%;
-    background-color: #ffffff;
-    transform: scaleX(0);
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
+    height: 4px;
+    background-color: rgb(41, 28, 218);
+    position: absolute;
+    bottom: -5px;
+    left: 0;
 }
 
-.nav-links a:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-    background-color: rgb(255, 255, 255);
+/* Ensure links are relatively positioned to allow ::after positioning */
+.nav-links a,
+.sidebar-links a {
+    position: relative;
 }
 
-.RouterLink-active,
-.RouterLink-exact-active,
-.RouterLink-active:hover,
-.RouterLink-exact-active:hover {
-    color: white;
-    text-decoration: none;
-}
+
 
 .hamburger {
     display: none;
@@ -204,7 +237,6 @@ const sidebarClass = computed(() => (isSidebarOpen.value ? 'open' : 'closed'))
     align-items: center;
     justify-content: center;
     gap: 40px;
-    /* Equal spacing between sidebar links */
     font-size: 2rem;
     transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
@@ -223,5 +255,15 @@ const sidebarClass = computed(() => (isSidebarOpen.value ? 'open' : 'closed'))
     background-color: #000;
     border-radius: 16px;
     padding: 8px;
+}
+
+.nav-links a,
+.sidebar-links a {
+    position: relative;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    /* Apply the Poppins font */
+    font-weight: 600;
+    /* Bold font weight */
 }
 </style>
