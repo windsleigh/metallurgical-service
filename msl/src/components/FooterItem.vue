@@ -38,8 +38,8 @@
       </div>
     </div>
   </template>
-  
-  <script setup>
+
+  <script setup lang="ts">
   import { ref } from "vue";
   import '@fortawesome/fontawesome-free/css/all.min.css';
   
