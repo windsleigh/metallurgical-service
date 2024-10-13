@@ -1,6 +1,7 @@
 <template>
   <div id="home" class="container">
-    <div class="text">Home</div>
+    <img src="../assets/home.jpg" alt="home" class="home-img" />
+    <!-- <div class="text">Home</div> -->
   </div>
 </template>
 
@@ -18,5 +19,11 @@
 
 .text {
   color: rgb(7, 0, 0);
+}
+
+.home image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>
