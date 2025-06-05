@@ -1,7 +1,7 @@
 <template>
     <div class="home-message-container">
       <div class="overlay">
-        <h1>Metallurgy Chemistry Experience</h1>
+        <h1>Mineral Processing Engineering Experience</h1>
         <p>We are experts in our field with over 30 years of experience with pilot facilities</p>
         <button>Explore our services</button>
       </div>
