@@ -2,7 +2,7 @@
   <section id="about" class="about-section">
     <h2 class="title">ABOUT US</h2>
 
-    <!-- Primera fila -->
+    <!-- First section -->
     <div class="row">
       <div class="column text">
         <h3>30 YEARS IN THE INDUSTRY</h3>
@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <!-- Segunda fila -->
+    <!-- Second section -->
     <div class="row">
       <div class="column image wide">
         <img src="../assets/a.png" alt="Plant" />
@@ -39,6 +39,7 @@
 </template>
 
 <style scoped>
+/* STYLES */
 .about-section {
   padding: 2rem 4rem;
   background-color: #ffffff;

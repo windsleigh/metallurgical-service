@@ -1,6 +1,7 @@
 <template>
   <section id="contact" class="contact-section">
     <h2 class="title">Contact</h2>
+    <!-- Forms -->
     <form action="https://formspree.io/f/mpwlanbo" method="POST" class="contact-form">
       <label>
         Your name:
@@ -87,7 +88,6 @@
   background-color: #0056b3;
 }
 
-/* Responsive */
 @media (max-width: 600px) {
   .contact-form {
     padding: 1rem;

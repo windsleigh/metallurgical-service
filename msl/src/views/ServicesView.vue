@@ -2,6 +2,7 @@
   <section id="services" class="services-section">
     <h2 class="title">SERVICES</h2>
 
+    <!-- Switch button -->
     <div class="tabs">
       <span
         :class="['tab', currentTab === 'LABORATORY' ? 'active' : '']"
@@ -17,6 +18,7 @@
       </span>
     </div>
 
+    <!-- List of sections -->
     <div class="services-container">
       <aside class="menu">
         <ul>
@@ -31,7 +33,7 @@
         </ul>
       </aside>
 
-      <main class="content">
+      <main class="content" v-if="selectedItem">
         <h3>{{ selectedItem.name }}</h3>
         <img :src="selectedItem.image" :alt="selectedItem.name" />
         <p>{{ selectedItem.description }}</p>
@@ -40,60 +42,71 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+// Import images from assets
 import PartnerImage1 from '../assets/lab1.jpg'
 import PartnerImage2 from '../assets/lab2.jpg'
 
-export default {
+// Strong type definition for ServiceItem
+interface ServiceItem {
+  name: string
+  image: string
+  description: string
+}
+
+export default defineComponent({
   data() {
+    // Content
+    const labList: ServiceItem[] = [
+      {
+        name: 'HYDRO METALLURGY',
+        image: PartnerImage1,
+        description:
+          'Proceso que utiliza soluciones acuosas para extraer metales. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+      },
+      {
+        name: 'FLOTATION',
+        image: PartnerImage2,
+        description: 'Separación de minerales por flotación. Lorem ipsum dolor sit amet.'
+      }
+    ]
+
+    const consList: ServiceItem[] = [
+      {
+        name: 'STRATEGIC PLANNING',
+        image: PartnerImage1,
+        description: 'Planificación de procesos industriales. Lorem ipsum dolor sit amet.'
+      },
+      {
+        name: 'COST ANALYSIS',
+        image: PartnerImage2,
+        description: 'Análisis de costos operacionales. Lorem ipsum dolor sit amet.'
+      }
+    ]
+
     return {
-      currentTab: 'LABORATORY',
-      selectedItem: {},
-      laboratoryList: [
-        {
-          name: 'HYDRO METALLURGY',
-          image: PartnerImage1,
-          description:
-            'Proceso que utiliza soluciones acuosas para extraer metales. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-        },
-        {
-          name: 'FLOTATION',
-          image: PartnerImage2,
-          description: 'Separación de minerales por flotación. Lorem ipsum dolor sit amet.'
-        }
-      ],
-      consultoryList: [
-        {
-          name: 'STRATEGIC PLANNING',
-          image: PartnerImage1,
-          description: 'Planificación de procesos industriales. Lorem ipsum dolor sit amet.'
-        },
-        {
-          name: 'COST ANALYSIS',
-          image: PartnerImage2,
-          description: 'Análisis de costos operacionales. Lorem ipsum dolor sit amet.'
-        }
-      ]
+      currentTab: 'LABORATORY' as 'LABORATORY' | 'CONSULTORY',
+      selectedItem: labList[0],
+      laboratoryList: labList,
+      consultoryList: consList
     }
   },
   computed: {
-    currentList() {
+    currentList(): ServiceItem[] {
       return this.currentTab === 'LABORATORY' ? this.laboratoryList : this.consultoryList
     }
   },
   methods: {
-    switchTab(tab) {
+    switchTab(tab: 'LABORATORY' | 'CONSULTORY') {
       this.currentTab = tab
       this.selectedItem = this.currentList[0]
     },
-    selectItem(item) {
+    selectItem(item: ServiceItem) {
       this.selectedItem = item
     }
-  },
-  mounted() {
-    this.selectedItem = this.laboratoryList[0]
   }
-}
+})
 </script>
 
 <style scoped>
